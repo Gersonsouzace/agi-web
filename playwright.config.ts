@@ -14,15 +14,16 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: process.env.CI ? [['allure-playwright'], ['html']] : 'html',
+  reporter: process.env.CI ? ['allure-playwright', 'html'] : 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  timeout: 30 * 1000, // 30 seconds per test
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://blog.agibank.com.br/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    actionTimeout: 5000,
+    navigationTimeout: 5000,
   },
 
   /* Configure projects for major browsers */
